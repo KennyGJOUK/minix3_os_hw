@@ -109,6 +109,7 @@ int	 execv(const char *, char * const *);
 int	 execve(const char *, char * const *, char * const *);
 int	 execvp(const char *, char * const *);
 pid_t	 fork(void);
+int chrt(long);
 long	 fpathconf(int, int);
 #if __SSP_FORTIFY_LEVEL == 0
 char	*getcwd(char *, size_t);
@@ -144,7 +145,6 @@ __aconst char *ttyname(int);
 int	 unlink(const char *);
 ssize_t	 write(int, const void *, size_t);
 
-int chrt(long);//lab
 
 /*
  * IEEE Std 1003.2-92, adopted in X/Open Portability Guide Issue 4 and later

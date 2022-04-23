@@ -12,14 +12,12 @@
 #if USE_CHRT
 
 int do_chrt(struct proc * caller, message *m_ptr){
-
     struct proc *rp;
-    long exp_time = m_ptr->m2_l1;
-
-    rp = proc_addr(m_ptr->m2_l2);//进程在内核中的位置
+    long exp_time;
+    exp_time = m_ptr->m2_l1;
+    rp = proc_addr(m_ptr->m2_l2);
     rp->p_deadline = exp_time;
-
-    return (OK)
+    return (OK);
 }
 
 
