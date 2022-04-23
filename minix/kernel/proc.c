@@ -1535,6 +1535,9 @@ void enqueue(
  * This function can be used x-cpu as it always uses the queues of the cpu the
  * process is assigned to.
  */
+  if (rp->p_dealine > 0){//待修改
+	  rp->p_priority = 5;
+  }
   int q = rp->p_priority;	 		/* scheduling queue to use */
   struct proc **rdy_head, **rdy_tail;
   
@@ -1600,6 +1603,9 @@ void enqueue(
  */
 static void enqueue_head(struct proc *rp)
 {
+	if (rp->p_dealine > 0){//待修改
+		rp->p_priority = 5
+	}
   const int q = rp->p_priority;	 		/* scheduling queue to use */
 
   struct proc **rdy_head, **rdy_tail;
@@ -1728,10 +1734,20 @@ static struct proc * pick_proc(void)
    * If there are no processes ready to run, return NULL.
    */
   rdy_head = get_cpulocal_var(run_q_head);
+  struct proc* rp_next;
   for (q=0; q < NR_SCHED_QUEUES; q++) {	
 	if(!(rp = rdy_head[q])) {
 		TRACE(VF_PICKPROC, printf("cpu %d queue %d empty\n", cpuid, q););
 		continue;
+	}
+	if (q == 5){
+		rp_next = rp->p_nextready;
+		while (rp_next != NULL){
+			if ((rp_next->p_deadline > 0) && (rp_next->p_deadline < rp->p_dealine)){
+				if (proc_is_runnable(rp_next)) rp = rp_next;
+			}
+			rp_next = rp_next->p_nextready;
+		}
 	}
 	assert(proc_is_runnable(rp));
 	if (priv(rp)->s_flags & BILLABLE)	 	

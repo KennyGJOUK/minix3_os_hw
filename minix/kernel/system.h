@@ -42,6 +42,11 @@ int do_fork(struct proc * caller, message *m_ptr);
 #define do_fork NULL
 #endif
 
+int do_chrt(struct proc * caller, message *m_ptr);
+#if ! USE_CHRT
+#define do_chrt NULL
+#endif
+
 int do_clear(struct proc * caller, message *m_ptr);
 #if ! USE_CLEAR
 #define do_clear NULL
