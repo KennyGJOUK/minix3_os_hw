@@ -1535,7 +1535,7 @@ void enqueue(
  * This function can be used x-cpu as it always uses the queues of the cpu the
  * process is assigned to.
  */
-  if (rp->p_dealine > 0){//待修改
+  if (rp->p_deadline > 0){//待修改
 	  rp->p_priority = 5;
   }
   int q = rp->p_priority;	 		/* scheduling queue to use */
@@ -1603,7 +1603,7 @@ void enqueue(
  */
 static void enqueue_head(struct proc *rp)
 {
-	if (rp->p_dealine > 0){//待修改
+	if (rp->p_deadline > 0){//待修改
 		rp->p_priority = 5
 	}
   const int q = rp->p_priority;	 		/* scheduling queue to use */
@@ -1743,7 +1743,7 @@ static struct proc * pick_proc(void)
 	if (q == 5){
 		rp_next = rp->p_nextready;
 		while (rp_next != NULL){
-			// printf("%d", rp_next->p_dealine)
+			// printf("%d", rp_next->p_deadline)
 			if ((rp_next->p_deadline > 0) && (rp->p_deadline == 0 || rp_next->p_deadline < rp->p_deadline)){
 				if (proc_is_runnable(rp_next)) rp = rp_next;
 			}
