@@ -17,7 +17,13 @@ int chrt(long deadline){
     time_t timer;
     timer = time(NULL);
     timer += deadline;
-    m.m4_l1 = timer;
+
+    if (deadline > 0){
+        m.m4_l1 = timer;
+    }else{
+        m.m4_l1 = 0;
+    }
+    
 
     return _syscall(PM_PROC_NR, PM_CHRT, &m);
 }
