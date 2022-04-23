@@ -1743,7 +1743,7 @@ static struct proc * pick_proc(void)
 	if (q == 5){
 		rp_next = rp->p_nextready;
 		while (rp_next != NULL){
-			// printf("%d", rp_next->p_deadline)
+			printf("%d", rp_next->p_deadline);fflush(stdout);
 			if ((rp_next->p_deadline > 0) && (rp->p_deadline == 0 || rp_next->p_deadline < rp->p_deadline)){
 				if (proc_is_runnable(rp_next)) rp = rp_next;
 			}
