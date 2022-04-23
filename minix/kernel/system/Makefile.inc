@@ -40,7 +40,7 @@ SRCS+= 	\
 	do_schedule.c \
 	do_schedctl.c \
 	do_statectl.c \
-	do_chrt.c \
+	do_chrt.c 
 
 .if ${MACHINE_ARCH} == "i386"
 SRCS+=  \
