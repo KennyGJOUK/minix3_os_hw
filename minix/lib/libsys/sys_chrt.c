@@ -3,7 +3,7 @@
 
 int sys_chrt(proc_ep, m)
 endpoint_t proc_ep;
-message deadline;
+message m;
 {
     m.m4_l2 = proc_ep;
     int r = _kernel_call(SYS_CHRT, &m);
