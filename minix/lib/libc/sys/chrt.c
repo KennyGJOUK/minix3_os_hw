@@ -15,15 +15,15 @@ int chrt(long deadline){
     alarm(deadline);
 
     time_t timer;
-    timer = time(NULL);
-    timer += deadline;
-
-    if (deadline > 0){
-        m.m4_l1 = timer;
-    }else{
-        m.m4_l1 = 0;
-    }
+    time(&timer);
+    if (deadline != 0) deadline = timer + deadline;
     
-
-    return _syscall(PM_PROC_NR, PM_CHRT, &m);
+    m.m2_l1 = deadline;
+    // if (deadline > 0){
+    //     m.m4_l1 = timer;
+    // }else{
+    //     m.m4_l1 = 0;
+    // }
+    
+    return(_syscall(PM_PROC_NR, PM_CHRT, &m));
 }

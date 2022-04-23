@@ -11,7 +11,7 @@
 
 int do_chrt(){
     //注册 chrt 服务，将 deadline 传入到内核层
-    sys_chrt(who_p, m_in);
+    sys_chrt(who_p, m_in.m2_l1);
 
     return(OK);
 }
